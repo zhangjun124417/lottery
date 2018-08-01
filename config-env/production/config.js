@@ -1,5 +1,4 @@
 import { resolve } from 'path';
-import ReadPreference from 'mongodb/lib/read_preference';
 
 const {
   env
@@ -7,59 +6,45 @@ const {
 
 export default {
   port: {
-    http: 7009,
-    https: 7109
+    http: 6009,
+    https: 6109
   },
   https: {
-    pfx: '',
-    passphrase: ''
+    pfx: undefined,
+    passphrase: undefined
   },
   mongo: {
-    user: env.MONGO_USER || '',
-    pwd: env.MONGO_PWD || '',
-    replset: [
-      {
-        host: env.MONGO_PRIMARY_HOST || 'localhost',
-        port: env.MONGO_PRIMARY_PORT || '27017'
-      },
-      {
-        host: env.MONGO_SECONDARY_HOST || 'localhost',
-        port: env.MONGO_SECONDARY_PORT || '27018'
-      }
-    ],
-    db: 'smartcounterdatahouse',
+    host: 'localhost',
+    port: '27017',
+    db: 'lottery',
+    user: 'admin',
+    pwd: 'passwd',
+    authSource: 'admin',
     options: {
       server: {
-        reconnectTries: Number.MAX_VALUE
-      },
-      replset: {
-        replicaSet: env.MONGO_REPLSET || 'rs0',
-        poolSize: 10,
+        poolSize: 1,
         socketOptions: {
           connectTimeoutMS: 30000,
           socketTimeoutMS: 360000
         }
-      },
-      db: {
-        readPreference: ReadPreference.SECONDARY_PREFERRED
       }
     }
   },
   redis: {
-    host: env.REDIS_HOST || 'localhost',
-    port: env.REDIS_PORT || '6379',
-    auth: env.REDIS_AUTH || '',
-    db: 0
+    host: 'localhost',
+    port: '6379',
+    auth: 'root1234',
+    db: 2
   },
   cookie: {
     secure: false, // cookie secure 属性
-    db: 1
+    db: 10
   },
   log: {
     level: 'TRACE'
   },
   static: {
-    maxAge: 365 * 24 * 60 * 60
+    maxAge: 0
   },
   dir: {
     root: resolve(__dirname, '../')

@@ -6,6 +6,20 @@ export default {
     },
     component: () => import('./index/index')
   },
+  '/fix': {
+    name: 'homepage',
+    meta: {
+      title: '固定数列'
+    },
+    component: () => import('./index/fix')
+  },
+  '/tokyo/fixed': {
+    name: 'homepage',
+    meta: {
+      title: '东京'
+    },
+    component: () => import('./index/tokyo')
+  },
   '/example/:id': {
     name: 'example',
     meta: {
